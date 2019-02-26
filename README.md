@@ -1,2 +1,2 @@
 # KeyValueService
-KeyValue Server and Client solztion - (OneIdentity Test) 
+KeyValue Server and Client solution - (OneIdentity Test) 
