@@ -1,4 +1,4 @@
-package com.oneidentity.test;
+package com.oneidentity.app;
 
 import java.util.Scanner;
 
