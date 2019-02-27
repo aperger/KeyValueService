@@ -101,7 +101,7 @@ sudo unzip -d /opt/gradle gradle-4.10.3-bin.zip
 ls /opt/gradle/gradle-4.10.3/
 sudo vi /etc/profile.d/gradle.sh
 ```
-Cotent of `/etc/profile.d/gradle.sh` file:
+Content of `/etc/profile.d/gradle.sh` file:
 ```bash
 export GRADLE_HOME=/opt/gradle/gradle-4.10.3
 export PATH=${GRADLE_HOME}/bin:${PATH}
@@ -109,11 +109,9 @@ export PATH=${GRADLE_HOME}/bin:${PATH}
 
 ```shell
 sudo mcedit /etc/profile.d/gradle.sh
-sudo mc
 sudo chmod +x /etc/profile.d/gradle.sh
 source /etc/profile.d/gradle.sh 
 gradle -v
-
 ```
 
 ## Build with 'Makefile'
