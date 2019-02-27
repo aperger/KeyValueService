@@ -39,7 +39,9 @@ keyvalue-server/bin/keyvalue-server.bat
 keyvalue-server/bin/keyvalue-server
 $ cd keyvalue-server/bin/
 $ ./keyvalue-server
-Usage: java -cp=[...] TcpServer <port number>
+Usage: java -cp=[...] Server <port number>
+-- OR --
+Usage: <path to keyvalue-server>/bin/keyvalue-server <port number>
 $ ./keyvalue-server 11111
 IP1. = fe80:0:0:0:3357:d6b3:ffe9:172b%enp0s3 is a linked address
 IP2. = 10.0.2.15
@@ -66,6 +68,8 @@ keyvalue-client/bin/keyvalue-client
 $ cd keyvalue-client/bin/
 $ ./keyvalue-client
 Usage: java -cp=[...] Client <host name> <port number>
+-- OR --
+Usage: <path to keyvalue-client>/bin/keyvalue-client <host name> <port number>
 $ ./keyvalue-client localhost 11111
 \send ID001 data01
 Response #1:	
@@ -73,6 +77,9 @@ DONE : size is 1
 \get ID001
 Response #2:	
 ID001 data01
+
+\quit
+********** E N D *********
 ```
 
 ### Install JDK and Gradle on Ubuntu
