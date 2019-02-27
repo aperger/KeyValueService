@@ -22,6 +22,59 @@ tar xvf keyvalue-client.tar
 
 We will get directory with the previous commands called `keyvalue-client` or `keyvalue-server`. Inside these directories there will be `bin` and `lib` subdirectories. The `lib` directory contains the JAR files, the `bin` directory contains the executable files (`keyvalue-client` or `keyvalue-server.bat`). With these scripts we can executes the programs in command line under Windows and Linux too.
 
+## Start Server and Client
+
+Server:
+
+```shell
+$ pwd
+/home/aperger/Data/KeyValueService/server/build/distributions
+$ tar xvf keyvalue-server.tar
+keyvalue-server/
+keyvalue-server/lib/
+keyvalue-server/lib/keyvalue-server.jar
+keyvalue-server/lib/keyvalue-common.jar
+keyvalue-server/bin/
+keyvalue-server/bin/keyvalue-server.bat
+keyvalue-server/bin/keyvalue-server
+$ cd keyvalue-server/bin/
+$ ./keyvalue-server
+Usage: java -cp=[...] TcpServer <port number>
+$ ./keyvalue-server 11111
+IP1. = fe80:0:0:0:3357:d6b3:ffe9:172b%enp0s3 is a linked address
+IP2. = 10.0.2.15
+IP3. = 0:0:0:0:0:0:0:1%lo
+IP4. = 127.0.0.1
+com.oneidentity.net.TcpServer is bound on 11111
+Close a client sokcet: 1
+Close a client sokcet: 2
+```
+
+Client:
+
+```shell
+$ pwd
+/home/aperger/Data/KeyValueService/client/build/distributions
+$ tar xvf keyvalue-client.tar 
+keyvalue-client/
+keyvalue-client/lib/
+keyvalue-client/lib/keyvalue-client.jar
+keyvalue-client/lib/keyvalue-common.jar
+keyvalue-client/bin/
+keyvalue-client/bin/keyvalue-client.bat
+keyvalue-client/bin/keyvalue-client
+$ cd keyvalue-client/bin/
+$ ./keyvalue-client
+Usage: java -cp=[...] Client <host name> <port number>
+$ ./keyvalue-client localhost 11111
+\send ID001 data01
+Response #1:	
+DONE : size is 1
+\get ID001
+Response #2:	
+ID001 data01
+```
+
 ### Install JDK and Gradle on Ubuntu
 
 ```shell
