@@ -25,7 +25,7 @@ We will get directory with the previous commands called `keyvalue-client` or `ke
 ### Install JDK and Gradle on Ubuntu
 
 ```shell
-sudo apt-get install default-jre
+sudo apt-get install default-jdk
 java -version
 cd temp/
 wget https://downloads.gradle.org/distributions/gradle-4.10.3-bin.zip
