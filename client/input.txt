@@ -1,0 +1,5 @@
+\send ADRR1212d Ez az első tesztsor
+\send ADRR52742ZZU1212d 2. tesztsor
+\send CC3333VVV333 3.
+\get
+\quit
