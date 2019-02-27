@@ -22,6 +22,32 @@ tar xvf keyvalue-client.tar
 
 We will get directory with the previous commands called `keyvalue-client` or `keyvalue-server`. Inside these directories there will be `bin` and `lib` subdirectories. The `lib` directory contains the JAR files, the `bin` directory contains the executable files (`keyvalue-client` or `keyvalue-server.bat`). With these scripts we can executes the programs in command line under Windows and Linux too.
 
+### Install JDK and Gradle on Ubuntu
+
+```shell
+sudo apt-get install default-jre
+java -version
+cd temp/
+wget https://downloads.gradle.org/distributions/gradle-4.10.3-bin.zip
+sudo unzip -d /opt/gradle gradle-4.10.3-bin.zip 
+ls /opt/gradle/gradle-4.10.3/
+sudo vi /etc/profile.d/gradle.sh
+```
+Cotent of `/etc/profile.d/gradle.sh` file:
+```bash
+export GRADLE_HOME=/opt/gradle/gradle-4.10.3
+export PATH=${GRADLE_HOME}/bin:${PATH}
+```
+
+```shell
+sudo mcedit /etc/profile.d/gradle.sh
+sudo mc
+sudo chmod +x /etc/profile.d/gradle.sh
+source /etc/profile.d/gradle.sh 
+gradle -v
+
+```
+
 ## Build with 'Makefile'
 
 `TODO`
