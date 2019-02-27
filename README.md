@@ -21,3 +21,7 @@ tar xvf keyvalue-client.tar
 ```  
 
 We will get directory with the previous commands called `keyvalue-client` or `keyvalue-server`. Inside these directories there will be `bin` and `lib` subdirectories. The `lib` directory contains the JAR files, the `bin` directory contains the executable files (`keyvalue-client` or `keyvalue-server.bat`). With these scripts we can executes the programs in command line under Windows and Linux too.
+
+## Build with 'Makefile'
+
+`TODO`
