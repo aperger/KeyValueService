@@ -1,6 +1,12 @@
 package com.oneidentity.net;
 
+import java.util.Collections;
+import java.util.Map;
+import java.util.TreeMap;
+
 public class TcpServer extends AbstractTcpServer {
+	
+	protected final Map<String, String> items = Collections.synchronizedMap(new TreeMap<>());
            
     public TcpServer(
             String aInterfaceName, 
@@ -21,7 +27,7 @@ public class TcpServer extends AbstractTcpServer {
 	 */
 	@Override
 	public AbstractTcpServerWorker getWorkerThread(ClientSocketItem clientSocketItem) {
-		return new TcpServerWorker(clientSocketItem);
+		return new TcpServerWorker(clientSocketItem, items);
 	}
     
 }
