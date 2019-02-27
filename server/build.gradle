@@ -15,8 +15,8 @@ dependencies {
 
 	api project(':keyvalue-common')
 	
-    // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
+	// Use JUnit test framework
+	//testImplementation 'junit:junit:4.12'
 }
 
 // In this section you declare where to find the dependencies of your project
