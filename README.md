@@ -71,12 +71,20 @@ Usage: java -cp=[...] Client <host name> <port number>
 -- OR --
 Usage: <path to keyvalue-client>/bin/keyvalue-client <host name> <port number>
 $ ./keyvalue-client localhost 11111
-\send ID001 data01
+\send DATA01 rth e6 984te tp94694u983 5694
 Response #1:	
 DONE : size is 1
-\get ID001
+\send DATA02 iö9 4w tutu 3öurö934u5ruju4wrö jfmvlkjtr931u4
 Response #2:	
-ID001 data01
+DONE : size is 2
+\get
+Response #3:	
+DATA01 rth e6 984te tp94694u983 5694
+DATA02 iö9 4w tutu 3öurö934u5ruju4wrö jfmvlkjtr931u4
+
+\get DATA02
+Response #4:	
+DATA02 iö9 4w tutu 3öurö934u5ruju4wrö jfmvlkjtr931u4
 
 \quit
 ********** E N D *********
