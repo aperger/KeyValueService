@@ -9,9 +9,9 @@ public abstract class AbstractTcpServerWorker implements Runnable {
 
 	private ClientSocketItem clientSocket = null;
 
-	public AbstractTcpServerWorker(ClientSocketItem aClientSocket) {
+	public AbstractTcpServerWorker(ClientSocketItem clientSocket) {
 		super();
-		this.clientSocket = aClientSocket;
+		this.clientSocket = clientSocket;
 	}
 
 	public ClientSocketItem getClientSocket() {

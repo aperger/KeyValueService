@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public abstract class AbstractTcpServer extends Thread {
 
-	public static final int MAX_COUNT_OF_CLIENT_TREADS = 10;
+	public static final int MAX_COUNT_OF_CLIENT_THREADS = 10;
 	private ServerSocket ss = null;
 	private int serverPort = -1;
 	private int timeout = 0;
@@ -26,15 +26,15 @@ public abstract class AbstractTcpServer extends Thread {
 
 	protected AtomicLong clientIdGenerator;
 
-	public AbstractTcpServer(String aInterfaceName, int aServerPort, int aTimeOut) {
+	public AbstractTcpServer(String interfaceName, int serverPort, int timeOut) {
 		super();
 		this.clientIdGenerator = new AtomicLong(0);
-		this.serverPort = aServerPort;
-		this.timeout = aTimeOut;
+		this.serverPort = serverPort;
+		this.timeout = timeOut;
 		this.countOfClientThread = 0;
 		this.clients = new ClientSocketMap();
 		try {
-			setUpNetInterface(aInterfaceName);
+			setUpNetInterface(interfaceName);
 			this.ss = new ServerSocket();
 		} catch (Exception e) {
 			this.ss = null;
@@ -190,7 +190,7 @@ public abstract class AbstractTcpServer extends Thread {
 	public ClientSocketItem increaseCountOfClientThread(Socket s) {
 		synchronized (lockCounter) {
 
-			if (MAX_COUNT_OF_CLIENT_TREADS <= this.countOfClientThread) {
+			if (MAX_COUNT_OF_CLIENT_THREADS <= this.countOfClientThread) {
 				// TODO: Send response -> "THE SERVER IS TOO BUSY"
 				try {
 					s.close();
