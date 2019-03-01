@@ -34,7 +34,7 @@ public class Client {
 				parser.setRawRequest(line);
 
 				if (!parser.isValid()) {
-					System.err.println("Invalid request: " + line);
+					System.err.print(String.format("ERROR : Invalid request -> '%S'%n", line));
 				} else {
 					counter++;
 					tcpClient.getRequest().setLength(0);

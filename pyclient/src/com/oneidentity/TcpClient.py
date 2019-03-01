@@ -43,14 +43,13 @@ class Socket(object):
             if (data == None):
                 break
             msg = data.decode("utf-8")
+            result += msg
             
-            endOfMsg = msg[(-1*Socket.MESSAGE_SEPARATOR_LEN):];
+            # check the end of th emessage
+            endOfMsg = result[(-1*Socket.MESSAGE_SEPARATOR_LEN):];
             if endOfMsg == Socket.MESSAGE_SEPARATOR:
-                result += msg[:(-1*Socket.MESSAGE_SEPARATOR_LEN)]
-                break
-            else:
-                result += msg
-                
+                result = result[:(-1*Socket.MESSAGE_SEPARATOR_LEN)]
+                break                
         
         self.socket.close()
         return result

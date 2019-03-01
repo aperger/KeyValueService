@@ -9,10 +9,10 @@ public class RequestParser {
 	public static final String COMMAND_GET = "\\get";
 	public static final String COMMAND_QUIT = "\\quit";
 
-	public static final String PATTERN = "([\\" + COMMAND_SEND 
+	public static final String PATTERN = "(\\" + COMMAND_SEND 
 			+ "|\\"	+ COMMAND_GET 
 			+ "|\\" + COMMAND_QUIT
-			+ "]+)\\s{0,1}([a-z,A-Z,0-9]*)?\\s{0,1}(.*)";
+			+ "){1}\\s{1}([a-z,A-Z,0-9]*)?\\s{0,1}(.*)";
 
 	private String rawRequest;
 	private boolean isValid;
@@ -26,6 +26,11 @@ public class RequestParser {
 		command = "";
 		key= "";
 		value= "";
+		if (COMMAND_GET.equals(getRawRequest()) || COMMAND_SEND.equals(getRawRequest()) || COMMAND_QUIT.equals(getRawRequest())) {
+			command = getRawRequest();
+			setValid(true);
+			return;
+		}
 		
 		Matcher m = r.matcher(getRawRequest());
 		setValid(m.find());
@@ -92,9 +97,11 @@ public class RequestParser {
 			"\\send CC3333VVV333 3.",
 			"\\get CC3333VVV333",
 			"\\get",
+			"\\get MISSING01",
+			"\\getall",
 			"\\quit"
 		};
-		boolean[] results = new boolean[] {true, false, false, true, true, true, true, true};
+		boolean[] results = new boolean[] {true, false, false, true, true, true, true, true, false, true};
 		
 		if (results.length != requests.length) {
 			throw new RuntimeException("Invalid test input");
@@ -109,7 +116,7 @@ public class RequestParser {
 			if (expected != parser.isValid()) {
 				System.err.println("Test failed at request: " + request);
 			} else {
-				System.out.printf("Valid (\"%s\")-> comand: %s, key: %s, value: %s%n", request, parser.getCommand(), parser.getKey(), parser.getValue());
+				System.out.printf("Valid result: %b (\"%s\")-> comand: %s, key: %s, value: %s%n", parser.isValid(), request, parser.getCommand(), parser.getKey(), parser.getValue());
 				counter++;
 			}
 		}
