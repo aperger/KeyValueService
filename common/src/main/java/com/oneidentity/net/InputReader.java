@@ -28,12 +28,13 @@ public class InputReader {
 			if (readsize > 0) {
 				allReaded += readsize;
 				strBuffer = (new String(buffer)).substring(0, readsize);
-				int pos = strBuffer.lastIndexOf(MESSAGE_SEPARATOR);
-				if (pos < 0) {
-					request.append(strBuffer);
-				} else {
-					strBuffer = strBuffer.substring(0, pos);					
-					request.append(strBuffer);
+				request.append(strBuffer);
+				
+				// Check the end of hole request to find the separator
+				int fromIndex = request.length() > MESSAGE_SEPARATOR.length() ? request.length() - MESSAGE_SEPARATOR.length() : 0;
+				int pos = request.indexOf(MESSAGE_SEPARATOR, fromIndex);
+				if (pos >= 0) {
+					request.setLength(request.length() - MESSAGE_SEPARATOR.length());
 					return allReaded;
 				}
 			}

@@ -2,4 +2,6 @@
 \send ADRR52742ZZU1212d 2. tesztsor
 \send CC3333VVV333 3.
 \get
+\get FZTFZFTZ
+\getall
 \quit

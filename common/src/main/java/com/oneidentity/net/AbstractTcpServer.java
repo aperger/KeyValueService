@@ -8,8 +8,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 public abstract class AbstractTcpServer extends Thread {
@@ -21,7 +24,7 @@ public abstract class AbstractTcpServer extends Thread {
 	private NetworkInterface netInterface;
 	private int countOfClientThread = 0;
 	private Object lockCounter = new Object();
-	private ClientSocketMap clients;
+	private Map<Long, ClientSocketItem> clients;
 	private boolean closeThread = false;
 
 	protected AtomicLong clientIdGenerator;
@@ -32,7 +35,7 @@ public abstract class AbstractTcpServer extends Thread {
 		this.serverPort = serverPort;
 		this.timeout = timeOut;
 		this.countOfClientThread = 0;
-		this.clients = new ClientSocketMap();
+		this.clients = Collections.synchronizedMap(new TreeMap<Long, ClientSocketItem>());
 		try {
 			setUpNetInterface(interfaceName);
 			this.ss = new ServerSocket();
@@ -228,13 +231,15 @@ public abstract class AbstractTcpServer extends Thread {
 	public void run() {
 		while (!closeThread) {
 			ClientSocketItem cs;
-			Iterator<ClientSocketItem> it = this.clients.values().iterator();
-			while (it.hasNext()) {
-				cs = it.next();
-				if (cs.getSocket().isClosed()) {
-					it.remove();
-					decreaseCountOfClientThread(cs);
-				}
+			synchronized (this.clients) {
+				Iterator<ClientSocketItem> it = this.clients.values().iterator();
+				while (it.hasNext()) {
+					cs = it.next();
+					if (cs.getSocket().isClosed()) {
+						it.remove();
+						decreaseCountOfClientThread(cs);
+					}
+				}				
 			}
 			try {
 				Thread.sleep(100);

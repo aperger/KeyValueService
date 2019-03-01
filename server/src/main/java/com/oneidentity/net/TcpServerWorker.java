@@ -35,7 +35,7 @@ public class TcpServerWorker extends AbstractTcpServerWorker {
 			// send back only one value
 			String value = items.get(key);
 			if (value == null) {
-				output.write(ACK_ERROR + " : invalid key-value pair");
+				output.write(ACK_ERROR + " : invalid key");
 			} else {
 				output.write(String.format("%s %s", key, value));
 			}
