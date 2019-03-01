@@ -3,6 +3,7 @@ KeyValue Server and Client solution - (OneIdentity Test)
 
 ## Directory structure
 The server application is in `server` directory, the client application is in ` client` directory. The common parts, shared classes are in the `common` subdirectory. Both applications refer to the commons directory (depend on it).
+The Python based client application is in `pyclient`.
 
 ## Build with 'gradle'
 When we get the source of applications (downloading or using "git clone"), we can use the `gradle build` command to build them. Example (the server):
