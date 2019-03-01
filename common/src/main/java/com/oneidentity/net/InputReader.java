@@ -18,7 +18,7 @@ public class InputReader {
 		int readsize = 0;
 		int allReaded = 0;
 		String strBuffer = "";
-		final int BUFFERSIZE = 5; //8192;
+		final int BUFFERSIZE = 8192;
 
 		InputReader.clearBuffer(request);
 
