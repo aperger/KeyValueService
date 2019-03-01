@@ -40,7 +40,7 @@ public class Client {
 					tcpClient.getRequest().setLength(0);
 					tcpClient.getRequest().append(line);
 					tcpClient.sendAndReceive();
-					System.out.printf("Response #%d:\t%n%s", counter, tcpClient.getResponse().toString());
+					System.out.printf("Response #%d:%n%s%n", counter, tcpClient.getResponse().toString());
 				}
 
 			}

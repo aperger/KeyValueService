@@ -28,14 +28,17 @@ public class TcpServerWorker extends AbstractTcpServerWorker {
 			items.put(key, value);
 			output.write(ACK_DONE + " : size is " + items.size());
 		}
-		output.write(System.lineSeparator());
 	}
 
 	private void actionGet(String key, PrintWriter output) {
 		if (key != null && !key.isEmpty()) {
 			// send back only one value
 			String value = items.get(key);
-			output.write(String.format("%s %s%n", key, value));
+			if (value == null) {
+				output.write(ACK_ERROR + " : invalid key-value pair");
+			} else {
+				output.write(String.format("%s %s", key, value));
+			}
 		} else {
 			synchronized (items) { // Synchronizing on map, not on set!
 				Set<String> keys = items.keySet();
@@ -43,31 +46,34 @@ public class TcpServerWorker extends AbstractTcpServerWorker {
 					output.write(String.format("%s %s%n", actKey, items.get(actKey)));
 				}
 			}
-
 		}
-		output.write(System.lineSeparator());
+		
 	}
 
 	private void actionQuit(PrintWriter output) {
 		// ECHO
 		output.write(RequestParser.COMMAND_QUIT);
-		output.write(System.lineSeparator());
 	}
 
 	/**
 	 * @see AbstractTcpServerWorker#workOnRequest(PrintWriter, String)
 	 */
 	public void workOnRequest(PrintWriter output, String request) {
+		System.out.printf("Request: '%s'%n", request.trim());
 		try {
 			requestParser.setRawRequest(request);
-
-			if (RequestParser.COMMAND_SEND.equals(requestParser.getCommand())) {
+			
+			if (!requestParser.isValid()) {
+				output.write(ACK_ERROR + " : invalid request");
+			} else if (RequestParser.COMMAND_SEND.equals(requestParser.getCommand())) {
 				actionSend(requestParser.getKey(), requestParser.getValue(), output);
 			} else if (RequestParser.COMMAND_GET.equals(requestParser.getCommand())) {
 				actionGet(requestParser.getKey(), output);
 			} else if (RequestParser.COMMAND_QUIT.equals(requestParser.getCommand())) {
 				actionQuit(output);
 			}
+			
+			output.write(InputReader.MESSAGE_SEPARATOR);
 		} catch (Exception e1) {
 			return;
 		}

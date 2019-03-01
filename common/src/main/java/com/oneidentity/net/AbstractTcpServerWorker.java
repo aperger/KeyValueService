@@ -25,8 +25,7 @@ public abstract class AbstractTcpServerWorker implements Runnable {
 		try {
 			StringBuilder request = new StringBuilder();
 			try {
-				BufferedReader input = new BufferedReader(
-						new InputStreamReader(clientSocket.getSocket().getInputStream()));
+				BufferedReader input = new BufferedReader(new InputStreamReader(clientSocket.getSocket().getInputStream()));
 				PrintWriter output = new PrintWriter(clientSocket.getSocket().getOutputStream());
 				InputReader.read(input, request);
 				workOnRequest(output, request.toString());
