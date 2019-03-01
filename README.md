@@ -22,7 +22,7 @@ tar xvf keyvalue-client.tar
 
 We will get directory with the previous commands called `keyvalue-client` or `keyvalue-server`. Inside these directories there will be `bin` and `lib` subdirectories. The `lib` directory contains the JAR files, the `bin` directory contains the executable files (`keyvalue-client` or `keyvalue-server.bat`). With these scripts we can executes the programs in command line under Windows and Linux too.
 
-## Start Server and Client
+## Start Server and Client (Java)
 
 Server:
 
@@ -112,6 +112,23 @@ sudo mcedit /etc/profile.d/gradle.sh
 sudo chmod +x /etc/profile.d/gradle.sh
 source /etc/profile.d/gradle.sh 
 gradle -v
+```
+
+## Start Python client
+
+```bash
+$ pwd
+/home/aperger/Data/KeyValueService/pyclient/src
+$ export PYTHONPATH=.:$PATHONPATH
+$ python3 com/oneidentity/Client.py 
+usage: Client.py [-h] host port
+Client.py: error: the following arguments are required: host, port
+$ python3 com/oneidentity/Client.py localhost 11111
+Connecting to server 'localhost' on port :11111
+> \get
+DATA01 oir98eut oejt u49 
+
+> \quit
 ```
 
 ## Build with 'Makefile'
