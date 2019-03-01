@@ -38,7 +38,7 @@ public class InputReaderTest {
 	}
 
 	@Test
-	public final void test() throws IOException {
+	public final void testValid() throws IOException {
 		String rawRequest = "\\send SOMEID Some value of calculation";
 		BufferedReader input = createInput(rawRequest + InputReader.MESSAGE_SEPARATOR);
 		
@@ -48,4 +48,15 @@ public class InputReaderTest {
 		assertEquals("The reading of the request stream failded", rawRequest, request.toString());
 	}
 
+	
+	@Test
+	public final void testInvalid() throws IOException {
+		String rawRequest = "\\send SOMEID Some value of calculation";
+		BufferedReader input = createInput(rawRequest);
+		
+		StringBuilder request = new StringBuilder();
+		InputReader.read(input, request);
+		
+		assertNotEquals("The parsing of the request stream must provide empty result", rawRequest, request.toString());
+	}
 }

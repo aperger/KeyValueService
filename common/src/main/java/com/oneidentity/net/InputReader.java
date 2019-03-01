@@ -37,6 +37,12 @@ public class InputReader {
 					request.setLength(request.length() - MESSAGE_SEPARATOR.length());
 					return allReaded;
 				}
+			} else {
+				int fromIndex = request.length() > MESSAGE_SEPARATOR.length() ? request.length() - MESSAGE_SEPARATOR.length() : 0;
+				int pos = request.indexOf(MESSAGE_SEPARATOR, fromIndex);
+				if (pos < 0) {
+					request.setLength(0);
+				}
 			}
 
 		} while (readsize > 0);
