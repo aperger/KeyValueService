@@ -132,6 +132,28 @@ DATA01 oir98eut oejt u49
 > \quit
 ```
 
+## Supported commands / request types
+
+Put/Send data to server:
+```
+\send [Key] [value]
+```
+
+Get back all data form server
+```
+\get
+```
+
+Get back one value from server
+```
+\get [Key]
+```
+
+Quit
+```
+\quit
+```
+
 ## Build with 'Makefile'
 
 `TODO`
