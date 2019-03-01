@@ -92,8 +92,8 @@ public abstract class AbstractTcpClient {
 			return false;
 		if (this.request.length() == 0)
 			return false;
-		output.println(request.toString());
-		output.println();
+		output.print(request.toString());
+		output.print(InputReader.MESSAGE_SEPARATOR);
 		output.flush();
 		return true;
 	}

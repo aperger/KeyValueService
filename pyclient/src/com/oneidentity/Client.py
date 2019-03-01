@@ -30,9 +30,10 @@ __version__ = 0.1
 __date__ = '2019-02-27'
 __updated__ = '2019-02-27'
 
-DEBUG = 0
+DEBUG = 1
 TESTRUN = 0
 PROFILE = 0
+MSG_LENGTH = 1;
 
 class CLIError(Exception):
     '''Generic exception to raise and log different fatal errors.'''
@@ -45,15 +46,27 @@ class CLIError(Exception):
         return self.msg
 
 def startProgram(host, port):
-    print("Connecting to server '{}' on port :{}".format(host, port))
     
+    print("Connecting to server '{}' on port :{}".format(host, port))
     socket = Socket(host, port)
-    try:
-        socket.connect()
-        socket.send(b'\\get')
+
+
+    readNext = True
+    while readNext:
         
-    except Exception as e:
-        sys.stderr.write("Error: " + str(e))
+        try:
+            socket.connect()
+        except Exception as e:
+            sys.stderr.write("Error: " + str(e))
+            sys.exit(1)
+            
+        request = input("> ")
+        if (request == '' or request == '\quit'):
+            readNext = False
+        else:
+            response = socket.send(request)
+            print(response)
+
 
 def main(argv=None): # IGNORE:C0111
     '''Command line options.'''

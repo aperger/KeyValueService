@@ -9,7 +9,11 @@ public class Server {
 
 	public Server(int portNumber) {
 		this.portNumber = portNumber;
+
 		new Thread(this::startTcpServer).start();
+		
+        // Register shutdown-hook
+        Runtime.getRuntime().addShutdownHook(new Thread(this::stopTCPServer));
 	}
 
 	public void startTcpServer() {

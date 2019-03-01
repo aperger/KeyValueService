@@ -4,10 +4,7 @@ Created on 2019. febr. 28.
 @author: aperger
 '''
 
-import select
 import socket
-from time import sleep
-
 
 class Socket(object):
     '''
@@ -15,6 +12,9 @@ class Socket(object):
     '''
 
     TIMEOUT_SECONDS = 5
+    MESSAGE_SEPARATOR = "\n\t"
+    MESSAGE_SEPARATOR_LEN = MESSAGE_SEPARATOR.__len__()
+
 
     def __init__(self, host, port):
         '''
@@ -29,19 +29,28 @@ class Socket(object):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
         self.socket.connect((self.host, self.port))
         self.socket.settimeout(self.TIMEOUT_SECONDS)
-        self.socket.setblocking(0)
         
     def send(self, request):
         
+        if (request.rfind(Socket.MESSAGE_SEPARATOR))<0:
+            request += Socket.MESSAGE_SEPARATOR
         
-        ready = select.select([self.socket], [], [],self.TIMEOUT_SECONDS)
-        self.socket.sendall(request)
-        while (not ready[0]):
-            print("Sleep")
-            sleep(1)
+        self.socket.sendall(request.encode("utf-8"))
+        
+        result = ""
+        while True:
+            data = self.socket.recv(4096)
+            if (data == None):
+                break
+            msg = data.decode("utf-8")
             
-        # if ready[0]:
-        data = self.socket.recv(4096)
+            endOfMsg = msg[(-1*Socket.MESSAGE_SEPARATOR_LEN):];
+            if endOfMsg == Socket.MESSAGE_SEPARATOR:
+                result += msg[:(-1*Socket.MESSAGE_SEPARATOR_LEN)]
+                break
+            else:
+                result += msg
+                
         
         self.socket.close()
-        return repr(data)
+        return result
