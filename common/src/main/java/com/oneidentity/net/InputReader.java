@@ -18,7 +18,7 @@ public class InputReader {
 		int readsize = 0;
 		int allReaded = 0;
 		String strBuffer = "";
-		final int BUFFERSIZE = 5; //8192;
+		final int BUFFERSIZE = 8192;
 
 		InputReader.clearBuffer(request);
 
@@ -36,6 +36,12 @@ public class InputReader {
 				if (pos >= 0) {
 					request.setLength(request.length() - MESSAGE_SEPARATOR.length());
 					return allReaded;
+				}
+			} else {
+				int fromIndex = request.length() > MESSAGE_SEPARATOR.length() ? request.length() - MESSAGE_SEPARATOR.length() : 0;
+				int pos = request.indexOf(MESSAGE_SEPARATOR, fromIndex);
+				if (pos < 0) {
+					request.setLength(0);
 				}
 			}
 
