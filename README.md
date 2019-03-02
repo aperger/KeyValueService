@@ -171,11 +171,11 @@ On Linux:
 ```shell
 $ pwd
 /home/aperger/Data/KeyValueService/client/build/distributio
-$ cat ../../input_big01.txt | ./keyvalue-client/keyvalue-server/bin/ localhost 11111
+$ cat ../../input_big01.txt | ./keyvalue-client/bin/keyvalue-client localhost 11111
 
 -- OR ---
 
-$ /keyvalue-client/keyvalue-server/bin/ localhost 11111 < ../../input_big01.txt
+$ ./keyvalue-client/bin/keyvalue-client localhost 11111 < ../../input_big01.txt
 ```
 
 We can start multiple client instances to send data into the server or query it.
