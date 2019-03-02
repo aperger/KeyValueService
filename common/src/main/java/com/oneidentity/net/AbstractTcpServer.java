@@ -230,8 +230,8 @@ public abstract class AbstractTcpServer extends Thread {
 	@Override
 	public void run() {
 		while (!closeThread) {
-			ClientSocketItem cs;
-			synchronized (this.clients) {
+			synchronized (lockCounter) {
+				ClientSocketItem cs;
 				Iterator<ClientSocketItem> it = this.clients.values().iterator();
 				while (it.hasNext()) {
 					cs = it.next();
@@ -239,10 +239,10 @@ public abstract class AbstractTcpServer extends Thread {
 						it.remove();
 						decreaseCountOfClientThread(cs);
 					}
-				}				
+				}
 			}
 			try {
-				Thread.sleep(100);
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				System.err.println(e.getMessage());
 				Thread.currentThread().interrupt();
