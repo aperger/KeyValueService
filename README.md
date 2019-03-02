@@ -157,3 +157,25 @@ Quit
 ## Build with 'Makefile'
 
 `TODO`
+
+
+## Stress Test
+The client application (Java) can read the standart input. So we can create huge test files with predefined requests (commands) to send lots of data into the server.
+
+On Windows:
+```
+D:\PrivateWork\Java\OneIdentity\client\build\distributions>keyvalue-client\bin\keyvalue-client localhost 11111 < ..\..\input_big01.txt
+```
+
+On Linux:
+```shell
+$ pwd
+/home/aperger/Data/KeyValueService/client/build/distributio
+$ cat ../../input_big01.txt | ./keyvalue-client/keyvalue-server/bin/ localhost 11111
+
+-- OR ---
+
+$ /keyvalue-client/keyvalue-server/bin/ localhost 11111 < ../../input_big01.txt
+```
+
+We can start multiple client instances to send data into the server or query it.
